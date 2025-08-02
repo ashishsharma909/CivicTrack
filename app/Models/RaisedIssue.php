@@ -18,6 +18,7 @@ class RaisedIssue extends Model
         'description',
         'category',
         'status',
+        'location',
         'image_path',
         'latitude',
         'longitude',

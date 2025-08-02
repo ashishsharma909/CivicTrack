@@ -13,35 +13,35 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #f0f0f0;
     }
 
-    /* Modern Navbar */
     nav {
-      background-color: #202d36;
-      padding: 12px 30px;
+      background-color: #1c1c1c;
+      padding: 14px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
 
     nav .logo {
-      color: #ffffff;
-      font-size: 22px;
+      color: #00bcd4;
+      font-size: 24px;
       font-weight: bold;
     }
 
     nav .links a {
-      color: #ffffff;
+      color: #ddd;
       margin-left: 20px;
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
 
     nav .links a:hover {
-      color: #00bcd4;
+      color: #00e6e6;
     }
 
     .container {
@@ -51,25 +51,68 @@
     }
 
     .section-title {
-      font-size: 26px;
-      margin-bottom: 20px;
-      color: #2c3e50;
+      font-size: 32px;
+      color: #ffffff;
+      text-align: center;
+      border-bottom: 2px solid #00bcd4;
+      display: inline-block;
+      padding-bottom: 8px;
+      margin-bottom: 40px;
     }
 
+    .issue-card {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .issue-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .issue-card h4 {
+      color: #00e6e6;
+      margin-bottom: 10px;
+    }
+
+    .issue-card p {
+      color: #ddd;
+      margin: 6px 0;
+    }
+
+    .issue-card img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 15px 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .issue-card a {
+      color: #00bcd4;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .issue-card a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
 
     footer {
-      background-color: #202d36;
-      color: #ffffff;
+      background-color: #1c1c1c;
+      color: #ccc;
       text-align: center;
       padding: 16px;
       margin-top: 40px;
+      font-size: 14px;
     }
 
     @media (max-width: 768px) {
-      .two-column {
-        flex-direction: column;
-      }
-
       nav {
         flex-direction: column;
         align-items: flex-start;
@@ -89,26 +132,30 @@
     <div class="links">
       <a href="/home">Dashboard</a>
       <a href="#">Reported Issues</a>
-      <a href="/registerProblem">Raise A problem</a>
-      <a href="#">Your Issues</a>
-      <a href="#">Logout</a>
+      <a href="/registerProblem">Raise A Problem</a>
+      <a href="/">Logout</a>
     </div>
   </nav>
 
-<section>
-    <h1>Problems near you</h1>
-@foreach ($issues as $issue)
-    <div style="margin-bottom: 30px; border: 1px solid #ccc; padding: 15px; border-radius: 10px;">
+  <!-- Problems Section -->
+  <div class="container">
+    <h1 class="section-title">Problems Near You</h1>
+
+    @foreach ($issues as $issue)
+      <div class="issue-card">
         <h4>{{ $issue->headline }}</h4>
-        <img src="{{ asset('storage/' . $issue->image_path) }}" alt="Issue Image" style="max-width: 300px; display:block; margin:10px 0;">
+        <img src="{{ asset('storage/' . $issue->image_path) }}" alt="Issue Image">
         <h4>Status: {{ $issue->status }}</h4>
         <p>{{ $issue->description }}</p>
-        <p>Location: Lat {{ $issue->latitude }}, Long {{ $issue->longitude }}</p>
-    </div>
-@endforeach
-
-
-</section>
+        <p><strong>Location:</strong> {{ $issue->location }}</p>
+        <p>
+          <a href="https://www.google.com/maps/search/?api=1&query={{ $issue->latitude }},{{ $issue->longitude }}" target="_blank">
+            📍 View on Google Maps
+          </a>
+        </p>
+      </div>
+    @endforeach
+  </div>
 
   <!-- Footer -->
   <footer>

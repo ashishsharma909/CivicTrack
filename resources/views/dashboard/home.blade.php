@@ -13,53 +13,57 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #f0f0f0;
     }
 
-    /* Modern Navbar */
     nav {
-      background-color: #202d36;
-      padding: 12px 30px;
+      background-color: #1c1c1c;
+      padding: 14px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
 
     nav .logo {
-      color: #ffffff;
-      font-size: 22px;
+      color: #00bcd4;
+      font-size: 24px;
       font-weight: bold;
     }
 
     nav .links a {
-      color: #ffffff;
+      color: #ddd;
       margin-left: 20px;
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
 
     nav .links a:hover {
-      color: #00bcd4;
+      color: #00e6e6;
     }
 
     .container {
       max-width: 1200px;
-      margin: 40px auto;
+      margin: 50px auto;
       padding: 20px;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
     }
 
     .section-title {
-      font-size: 26px;
+      font-size: 28px;
       margin-bottom: 20px;
-      color: #2c3e50;
+      color: #00e6e6;
     }
 
     .two-column {
       display: flex;
       gap: 40px;
       flex-wrap: wrap;
+      margin-bottom: 40px;
     }
 
     .column {
@@ -70,7 +74,8 @@
     .column p {
       font-size: 16px;
       line-height: 1.7;
-      margin-bottom: 24px;
+      color: #d0d0d0;
+      margin-bottom: 20px;
     }
 
     ul {
@@ -81,14 +86,43 @@
     li {
       margin-bottom: 12px;
       font-size: 16px;
+      color: #d0d0d0;
+    }
+
+    li strong {
+      color: #00bcd4;
     }
 
     footer {
-      background-color: #202d36;
-      color: #ffffff;
+      background-color: #1c1c1c;
+      color: #ccc;
       text-align: center;
       padding: 16px;
       margin-top: 40px;
+      font-size: 14px;
+    }
+
+    a.logout-btn {
+      display: inline-block;
+      color: #ff4d4d;
+      text-decoration: none;
+      margin-left: 10px;
+      font-weight: 500;
+    }
+
+    a.logout-btn:hover {
+      color: #ff1a1a;
+    }
+
+    .welcome {
+      background: rgba(0, 0, 0, 0.4);
+      border-left: 4px solid #00e6e6;
+      padding: 16px 20px;
+      margin: 20px auto 40px;
+      color: #fff;
+      max-width: 800px;
+      border-radius: 10px;
+      font-size: 18px;
     }
 
     @media (max-width: 768px) {
@@ -109,19 +143,26 @@
 </head>
 <body>
 
+  <!-- Auth Welcome -->
+  @if(Session::has('user_name'))
+    <div class="welcome">
+      Welcome, {{ Session::get('user_name') }}!
+      <a class="logout-btn" href="{{ route('logout') }}">Logout</a>
+    </div>
+  @endif
+
   <!-- Navbar -->
   <nav>
     <div class="logo">CivicTrack</div>
     <div class="links">
       <a href="#">Dashboard</a>
       <a href="/problems">Reported Issues</a>
-      <a href="/registerProblem">Raise A problem</a>
-      <a href="#">Your Issues</a>
-      <a href="#">Logout</a>
+      <a href="/registerProblem">Raise A Problem</a>
+      <a href="/">Logout</a>
     </div>
   </nav>
 
-  <!-- Content Container -->
+  <!-- Content -->
   <div class="container">
 
     <!-- What is CivicTrack -->
@@ -133,8 +174,8 @@
       </div>
       <div class="column">
         <h2 class="section-title">How to Use</h2>
-        <p>Simply click on <strong>"Register a Problem"</strong> in the top menu, upload a photo of the issue, and let the system automatically capture your location. Once submitted, your report is visible to others on the map, raising awareness and urging authorities to take action.</p>
-        <p>The entire process is intuitive, fast, and mobile-friendly — so you can report issues on the go.</p>
+        <p>Click on <strong>"Raise A Problem"</strong> in the top menu, upload a photo of the issue, and let the system capture your location. Once submitted, your report is visible to others on the map, raising awareness and urging authorities to take action.</p>
+        <p>The entire process is fast, intuitive, and mobile-friendly — so you can report issues anytime, anywhere.</p>
       </div>
     </div>
 
@@ -152,7 +193,7 @@
     </div>
 
     <!-- Extra Section -->
-    <div class="two-column" style="margin-top: 40px;">
+    <div class="two-column">
       <div class="column">
         <h2 class="section-title">Future Vision</h2>
         <p>We envision CivicTrack becoming a national platform where citizens of any city can unite to improve civic infrastructure collaboratively. With proper support and reach, CivicTrack can become a bridge between communities and governing bodies.</p>

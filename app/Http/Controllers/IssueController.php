@@ -30,12 +30,14 @@ class IssueController extends Controller
             $imagePath = $request->file('image')->store('issues', 'public');
         }
 
+        
         // Save issue to database
-
-            $issue  = new RaisedIssue;
+        
+        $issue  = new RaisedIssue;
             $issue->headline = $request->input('headline');
             $issue->description = $request->input('description');
             $issue->category = $request->input('category');
+            $issue->location = $request->input('location');
             $issue->image_path = $imagePath;
             $issue->latitude = $request->input('latitude');
             $issue->longitude = $request->input('longitude');

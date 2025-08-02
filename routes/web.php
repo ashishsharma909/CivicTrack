@@ -36,3 +36,9 @@ Route::get('/registerProblem', function () {
 Route::post('/registerProblem', [IssueController::class, 'store'])->name('registerProblem');
 
 Route::get('/problems', [IssueController::class, 'showNearby'])->name('problems');
+
+Route::get('/logout', [Users::class, 'Logout'])->name('logout');
+
+if (!Session::has('user_id')) {
+    return redirect('/')->with('error', 'Please log in first.');
+};

@@ -40,11 +40,16 @@ class Users extends Controller
     public function Login(Request $request){
         $User = My_user::where('email' , $request->input('email'))->first();
 
-        if($User && Hash::check($request->input('password'), $User->password)){
-            return redirect()->route('User-dashboard')->with('logged in');
-        }else{
-            dump('email or password is not correct');
-        }
-    }
+         if ($User && Hash::check($request->input('password'), $User->password)) {
+        return redirect('/home')->with('message', 'Logged in successfully');
+    } else {
+        return back()->withErrors(['error' => 'Invalid email or password']);
+    };
+}
 
+    public function Logout(){
+        
+    Session::flush();
+    return redirect('/')->with('message', 'Logged out');
+}
 }
