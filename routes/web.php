@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Users;
+use App\Http\Controllers\IssueController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,16 @@ Route::get('/User/SignUp', function () {
 Route::post('/User/Login', [Users::class, 'Login'])->name('Login');
 Route::post('/User/SignUp', [Users::class, 'SignUp'])->name('User.SignUp');
 
-Route::get('/User-dashboard', function () {
+Route::get('/home', function () {
     return view('dashboard.home');
 })->name('User-dashboard');
+
+Route::get('/problems', function () {
+    return view('dashboard.problems');
+})->name('problems');
+
+Route::get('/registerProblem', function () {
+    return view('dashboard.registerProblem');
+})->name('registerProblem');
+
+Route::post('/registerProblem', [IssueController::class, 'store'])->name('registerProblem');
