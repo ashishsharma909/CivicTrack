@@ -29,12 +29,10 @@ Route::get('/home', function () {
     return view('dashboard.home');
 })->name('User-dashboard');
 
-Route::get('/problems', function () {
-    return view('dashboard.problems');
-})->name('problems');
-
 Route::get('/registerProblem', function () {
     return view('dashboard.registerProblem');
 })->name('registerProblem');
 
 Route::post('/registerProblem', [IssueController::class, 'store'])->name('registerProblem');
+
+Route::get('/problems', [IssueController::class, 'showNearby'])->name('problems');

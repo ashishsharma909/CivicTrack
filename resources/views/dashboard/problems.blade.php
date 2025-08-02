@@ -97,13 +97,17 @@
 
 <section>
     <h1>Problems near you</h1>
-    <div>
-        <h4>headline</h4>
-        <img src="#" alt="image" srcset="">
-        <h4>status</h4>
-        <p>description</p>
-        <p>location</p>
+@foreach ($issues as $issue)
+    <div style="margin-bottom: 30px; border: 1px solid #ccc; padding: 15px; border-radius: 10px;">
+        <h4>{{ $issue->headline }}</h4>
+        <img src="{{ asset('storage/' . $issue->image_path) }}" alt="Issue Image" style="max-width: 300px; display:block; margin:10px 0;">
+        <h4>Status: {{ $issue->status }}</h4>
+        <p>{{ $issue->description }}</p>
+        <p>Location: Lat {{ $issue->latitude }}, Long {{ $issue->longitude }}</p>
     </div>
+@endforeach
+
+
 </section>
 
   <!-- Footer -->

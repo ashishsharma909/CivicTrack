@@ -137,11 +137,9 @@
       @csrf
 
       <input type="text" name="headline" placeholder="Headline (e.g., Pothole near gate)" required>
-
       <textarea name="description" placeholder="Describe the issue briefly..." rows="4" required></textarea>
-
+      <input type="text" name="category" placeholder="enter the category" required>
       <input type="file" name="image" accept="image/*" onchange="previewImage(event)" required>
-
       <div class="preview">
         <img id="imagePreview" src="#" alt="Image Preview" style="max-width:100%; display:none;"/>
       </div>

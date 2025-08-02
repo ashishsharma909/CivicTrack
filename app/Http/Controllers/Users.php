@@ -43,7 +43,7 @@ class Users extends Controller
         if($User && Hash::check($request->input('password'), $User->password)){
             return redirect()->route('User-dashboard')->with('logged in');
         }else{
-            dump('email or password is correct');
+            dump('email or password is not correct');
         }
     }
 
