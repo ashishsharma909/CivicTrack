@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Users;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +20,6 @@ Route::get('/', function () {
 Route::get('/User/SignUp', function () {
     return view('User\SignUp');
 });
+
+Route::post('/', [Users::class, 'Login'])->name('Login');
+Route::post('/', [Users::class, 'SignUp'])->name('SignUp');
