@@ -21,5 +21,9 @@ Route::get('/User/SignUp', function () {
     return view('User\SignUp');
 });
 
-Route::post('/', [Users::class, 'Login'])->name('Login');
-Route::post('/', [Users::class, 'SignUp'])->name('SignUp');
+Route::post('/User/Login', [Users::class, 'Login'])->name('Login');
+Route::post('/User/SignUp', [Users::class, 'SignUp'])->name('User.SignUp');
+
+Route::get('/User-dashboard', function () {
+    return view('dashboard.home');
+})->name('User-dashboard');

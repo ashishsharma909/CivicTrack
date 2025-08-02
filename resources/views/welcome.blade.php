@@ -8,16 +8,19 @@
 <body>
     <div>
             <h1>Login</h1> 
-            <div>
-                <input type="email" required  name="email" id="email" placeholder = "enter email">
-            </div>
-            <div>
-                <input type="password" required name="password" id="password" placeholder = "enter password">
-            </div>
-            <div>
-                <a href="/User/SignUp">SignUp</a>
-                <input type="submit" value="submit">
-            </div>
+            <form method = "post" action="{{ route('Login') }}">
+                @csrf
+                <div>
+                    <input type="email" required  name="email" id="email" placeholder = "enter email">
+                </div>
+                <div>
+                    <input type="password" required name="password" id="password" placeholder = "enter password">
+                </div>
+                <div>
+                    <input type="submit" value="submit">
+                </div>
+            </form>
+            <a href="/User/SignUp">SignUp</a>
     </div>
 </body>
 </html>

@@ -9,22 +9,36 @@
     <div>
         <h1>SignUp</h1>
         <div>
-            <div>
-                <input type="text" name="name" id="name" placeholder = "enter your name">
-            </div>
-            <div>
-                <input type="email" name="email" id="email" placeholder = "enter your email">
-            </div>
-            <div>
-                <input type="password" name="password" id="passsword" placeholder = "enter password">
-            </div>
-            <div>
-                <input type="password" name="confirm_password" id="confirm_password" placeholder = "confirm password">
-            </div>
+            <form method = "post" action="{{ route ('User.SignUp') }}">
+                @csrf
+                <div>
+                    <input type="text" name="name" id="name" placeholder = "enter your name" required>
+                </div>
+                <div>
+                    <input type="email" name="email" id="email" placeholder = "enter your email" required>
+                </div>
+                <div>
+                    <input type="password" name="password" id="passsword" placeholder = "enter password" required>
+                </div>
+                <div>
+                    <input type="password" name="password_confirmation" id="confirm_password" placeholder = "confirm password" required>
+                </div>
+                <div>
+                    <input type="submit" value="submit">
+                    <a href="/">Back</a>
+                </div>
+
+            </form>
         </div>
-        <div>
-            <input type="submit" value="submit">
-        </div>
+
+        @if($errors->any()){
+            @foreach($errors->all() as $error){
+                {{$error}}
+            }
+            @endforeach
+        }
+        @endif
+
     </div>
 
 </body>
